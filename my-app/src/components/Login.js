@@ -1,15 +1,40 @@
 //Deavy
 //login form
 //sign-up link button
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+const initialFormValues = {
+  username: "",
+  password: "",
+};
+
 const Login = (props) => {
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  //control input
+  const change = (event) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   return (
     <div className="login-container">
       <form>
-        <input type="text" placeholder="Type your username"></input>
-        <input type="password" placeholder="Type your password"></input>
+        <input
+          name="username"
+          type="text"
+          onChange={change}
+          value={formValues.username}
+          placeholder="Type your username"
+        />
+        <input
+          name="password"
+          type="password"
+          onChange={change}
+          value={formValues.login}
+          placeholder="Type your password"
+        />
       </form>
       {/*Signup button links to: /signup*/}
       <Link to="/signup" className="signup">
