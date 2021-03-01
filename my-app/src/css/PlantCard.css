@@ -1,0 +1,30 @@
+.plant-card * {
+  padding: 0;
+  margin: 0;
+}
+
+.plant-card {
+  width: 200px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 1em;
+  border: black solid 2px;
+  overflow: hidden;
+}
+
+.plant-card img {
+  width: 100%;
+}
+
+.plant-card h3 {
+  position: absolute;
+  top: 1em;
+  text-align: center;
+  width: 100%;
+}
+
+.plant-card .info {
+  position: absolute;
+  bottom: 0;
+  padding: 1em;
+}
