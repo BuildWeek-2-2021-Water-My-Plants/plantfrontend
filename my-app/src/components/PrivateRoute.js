@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   //const Component = props.component
@@ -10,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           //if token is in localStorage, render the given component
           return <Component {...props} />;
         } else {
-          return <Login />;
+          return <Redirect to="/" />;
         }
       }}
     />
