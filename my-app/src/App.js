@@ -1,14 +1,20 @@
 import "./App.css";
 import Login from "./components/Login";
 import PlantList from "./components/PlantList";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Login />
-        <PlantList />
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/plantlist">
+            <PlantList />
+          </Route>
+        </Switch>
       </div>
     </Router>
   );

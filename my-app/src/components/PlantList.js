@@ -3,7 +3,7 @@
 //UI = display list of plant cards
 //has button that links to PlantForm (add plant)
 //Route to it would be plantlist
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import PlantCard from "./PlantCard";
 import { Link } from "react-router-dom";
@@ -17,14 +17,17 @@ const PlantList = (props) => {
       .catch((err) => {});
   }, []);
   return (
-    <div className="my-plants">
-      <div className="list">
-        <PlantCard />
-        <PlantCard />
-        <PlantCard />
+    <>
+      <Link to="/">Log out</Link>
+      <div className="my-plants">
+        <Link to="/plantform">Add Plant</Link>
+        <div className="list">
+          <PlantCard />
+          <PlantCard />
+          <PlantCard />
+        </div>
       </div>
-      <Link to="/plantform">Add Plant</Link>
-    </div>
+    </>
   );
 };
 
