@@ -1,0 +1,10 @@
+.my-plants {
+  background: darkgray;
+  padding: 1em;
+}
+
+.my-plants .list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}

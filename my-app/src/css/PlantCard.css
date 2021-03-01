@@ -4,8 +4,9 @@
 }
 
 .plant-card {
+  display: inline-block;
   width: 200px;
-  margin: 0 auto;
+  margin: 0 2em;
   position: relative;
   border-radius: 1em;
   border: black solid 2px;
