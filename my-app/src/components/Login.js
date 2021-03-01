@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import formSchema from "../validation/formSchema";
 import * as yup from "yup";
 import axios from "axios";
-import "../css/Login.css";
 
 const initialFormValues = {
   username: "",

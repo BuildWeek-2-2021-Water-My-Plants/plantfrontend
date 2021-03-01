@@ -2,7 +2,6 @@
 //plant card with link to image and info
 import React from "react";
 import img from "../images/plant.jpg";
-import "../css/PlantCard.css";
 
 const PlantCard = (props) => {
   return (

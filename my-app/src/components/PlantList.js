@@ -7,7 +7,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import PlantCard from "./PlantCard";
 import { Link } from "react-router-dom";
-import "../css/PlantList.css";
 
 const PlantList = (props) => {
   useEffect(() => {
@@ -18,7 +17,9 @@ const PlantList = (props) => {
   }, []);
   return (
     <>
-      <Link to="/">Log out</Link>
+      <Link className="logout-btn" to="/">
+        Log out
+      </Link>
       <div className="my-plants">
         <Link to="/plantform">Add Plant</Link>
         <div className="list">
