@@ -7,9 +7,13 @@ import PlantList from './components/PlantList';
 
 import './App.css';
 
+import "./css/Login.css";
+import "./css/PlantCard.css";
+import "./css/PlantList.css";
+
 const App = () => {
   return (
-  
+
     <Router>
        <div className="App">
            <Route exact path="/" component={Login} /> 
