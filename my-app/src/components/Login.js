@@ -3,6 +3,9 @@
 //sign-up link button
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import formSchema from "../validation/formSchema";
+import * as yup from "yup";
+import axios from "axios";
 
 const initialFormValues = {
   username: "",
@@ -11,16 +14,44 @@ const initialFormValues = {
 
 const Login = (props) => {
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [disabled, setDisabled] = useState(true);
 
-  //control input
+  //control input and validation
   const change = (event) => {
     const { name, value } = event.target;
+    yup
+      .reach(formSchema, name)
+      .validate(value)
+      .then((valid) => {
+        setFormErrors({ ...formErrors, [name]: "" });
+      })
+      .catch((err) => {
+        setFormErrors({ ...formErrors, [name]: err.errors[0] });
+      });
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const submit = (event) => {
+    event.preventDefault();
+    /* submit functionality, uncomment when it can be used
+    axios
+      .post("", formValues)
+      .then((res) => {})
+      .catch((err) => {});
+    */
+  };
+
+  //form validation
+  useEffect(() => {
+    formSchema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
+
   return (
     <div className="login-container">
-      <form>
+      <form onSubmit={submit}>
         <input
           name="username"
           type="text"
@@ -28,6 +59,7 @@ const Login = (props) => {
           value={formValues.username}
           placeholder="Type your username"
         />
+        <div className="username-error">{formErrors.username}</div>
         <input
           name="password"
           type="password"
@@ -35,6 +67,8 @@ const Login = (props) => {
           value={formValues.login}
           placeholder="Type your password"
         />
+        <div className="password-error">{formErrors.password}</div>
+        <button disabled={disabled}>Login</button>
       </form>
       {/*Signup button links to: /signup*/}
       <Link to="/signup" className="signup">
