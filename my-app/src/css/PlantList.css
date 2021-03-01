@@ -1,0 +1,15 @@
+.my-plants {
+  background: darkgray;
+  padding: 1em;
+}
+
+.my-plants .list {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.logout-btn {
+  display: block;
+  padding: 1em 0;
+}
