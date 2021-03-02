@@ -30,7 +30,7 @@ export const addPlant = (newPlant) => {
         axiosWithAuth()
         .post("/plants", newPlant)
         .then((res) => {
-            console.log("Add smurf res", res);
+            console.log("Add plant res", res);
             dispatch({type: FETCH_NEW_PLANT_SUCCESS, payload: res.data})
         })
         .catch((err) => {
