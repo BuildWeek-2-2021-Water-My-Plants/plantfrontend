@@ -1,10 +1,30 @@
-import { FETCH_PLANT_START, FETCH_PLANT_SUCCESS, FETCH_PLANT_FAIL, FETCH_NEW_PLANT_START, FETCH_NEW_PLANT_SUCCESS, FETCH_NEW_PLANT_FAIL } from '../actions/index';
+import { FETCH_USER_START, 
+  FETCH_USER_SUCCESS, 
+  FETCH_USER_FAIL, 
+  ADD_NEW_PLANT_START, 
+  ADD_NEW_PLANT_SUCCESS, 
+  ADD_NEW_PLANT_FAIL,
+  DELETE_PLANT_START,
+  DELETE_PLANT_SUCCESS,
+  DELETE_PLANT_FAIL, 
+  EDIT_USER_START,
+  EDIT_PLANT_START,
+  EDIT_PLANT_SUCCESS,
+  EDIT_PLANT_FAIL,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAIL} from '../actions/index';
 
 export const initialState = {
-  plants: [],
+  user: {
+    plants: [],
+    username: '',
+    email: '',
+    password: '',
+    // id: ''
+  },
   isLoading: false,
   error: '',
-  newPlant: [{
+  additionalPlants: [{
     id: "",
     nickname: "",
     species: "",
@@ -15,89 +35,106 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case(FETCH_PLANT_START):
+    case(FETCH_USER_START):
       return({
         ...state,
         isLoading: true,
       })
-    case(FETCH_PLANT_SUCCESS):
+    case(FETCH_USER_SUCCESS):
       return({
         ...state,
         isLoading: false,
-        plants: action.payload
+        user: action.payload
       })
-    case(FETCH_PLANT_FAIL):
+    case(FETCH_USER_FAIL):
       return({
         ...state,
         isLoading: false,
         error: action.payload
       })
-    case(FETCH_NEW_PLANT_START):
+    case(EDIT_USER_START):
+      return({
+        ...state,
+        isLoading: true,
+      })
+    case(EDIT_USER_SUCCESS):
+    const editUser = state.user.find((user) => user.id === action.payload)
+      return({
+        ...state.user, 
+        user: state.user.filter((user) => user.id !== action.payload)
+      })
+    case(EDIT_USER_FAIL):
+      return({
+        ...state,
+        isLoading: false,
+        error: action.payload
+      })
+    case(ADD_NEW_PLANT_START):
       return({
         ...state, 
         isLoading: true,
       })
-    case(FETCH_NEW_PLANT_SUCCESS):
+    case(ADD_NEW_PLANT_SUCCESS):
+    const newPlant = state.additionalPlants.find((plant) => plant.id === action.payload)
       return({
         ...state,
         isLoading: false, 
-        plants: [...state.data, action.payload],
-        newPlant: action.payload,
+        user: {
+          ...state.user,
+          plants: [...state.user.plants, newPlant]
+        },
+        additionalPlants: state.additionalPlants.filter(plant => action.payload !== plant.id),
       })
-    case(FETCH_NEW_PLANT_FAIL):
+    case(ADD_NEW_PLANT_FAIL):
       return({
         ...state,
         isLoading: false, 
         error: action.payload
       })
+    case(DELETE_PLANT_START):
+      return({
+        ...state,
+        isLoading: true,
+      })
+      case(DELETE_PLANT_SUCCESS):
+      const removePlant = state.user.plants.find((plant) => plant.id === action.payload);
+        return({
+          ...state,
+          additionalPlants: [...state.additionalPlants, removePlant],
+          user: {
+            ...state.user, 
+            plants: state.user.plants.filter((plant) => plant.id !== action.payload)
+          }
+        })
+      case(DELETE_PLANT_FAIL):
+        return({
+          ...state, 
+          isLoading: false, 
+          error: action.payload
+        })
+    case(EDIT_PLANT_START): 
+      return({
+        ...state, 
+        isLoading: true,
+      })
+    case(EDIT_PLANT_SUCCESS):
+    const editPlant = state.user.plants.find((plant) => plant.id === action.payload)
+      return({
+        ...state,
+        additionalPlants: [...state.additionalPlants, editPlant],
+        user: {
+          ...state.car,
+          plants: [...state.user.plants, editPlant]
+        }
+      })
+    case(EDIT_PLANT_FAIL): {
+      return({
+        ...state, 
+          isLoading: false, 
+          error: action.payload
+      })
+    }
     default:
       return state;
   }
 };
-
-
-// const initialState = {
-//   additionalPrice: 0,
-//   car: {
-//     price: 26395,
-//     name: '2019 Ford Mustang',
-//     image:
-//       'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
-//     features: []
-//   },
-//   additionalFeatures: [
-//     { id: 1, name: 'V-6 engine', price: 1500 },
-//     { id: 2, name: 'Racing detail package', price: 1500 },
-//     { id: 3, name: 'Premium sound system', price: 500 },
-//     { id: 4, name: 'Rear spoiler', price: 250 }
-//   ]
-// };
-
-// export const reducer = (state = initialState, action ) => {
-//   switch(action.type){
-//       case ADD_FEATURES:
-//         const newFeature = state.additionalFeatures.find(
-//           (feature) => feature.id === action.payload)
-//             return{
-//               ...state,
-//                 car: {
-//                     ...state.car,
-//                     features: [...state.car.features, newFeature]
-//                 },
-//                 additionalFeatures: state.additionalFeatures.filter(feature => action.payload !== feature.id),
-//                 additionalPrice: state.additionalPrice + newFeature.price
-//             }
-//           case DELETE_FEATURES:
-//             const removeFeature = state.car.features.find((feature) => feature.id === action.payload)
-//               return{
-//                 ...state, 
-//                 additionalPrice: state.additionalPrice - removeFeature.price,
-//                 additionalFeatures: [...state.additionalFeatures, removeFeature],
-//                 car: {
-//                   ...state.car, 
-//                   features: state.car.features.filter((feature) => feature.id !== action.payload)
-//                 }
-//             }
-//       default:
-//           return state;
-//   }
