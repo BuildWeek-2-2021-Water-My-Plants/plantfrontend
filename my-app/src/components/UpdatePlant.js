@@ -7,29 +7,17 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import axios from "axios";
+import { connect } from "react-redux";
 
-const initialPlant = {
-  id: "",
-  nickname: "",
-  species: "",
-  h2oFrequency: null,
-  image: "",
-};
-
-function UpdateUserForm(props) {
-  const [item, setItem] = useState(initialItem);
+function UpdatePlant(props) {
+  const [plant, setPlant] = useState({ ...props.plant });
   const id = props.match.params.id;
 
   const changeHandler = (ev) => {
     ev.persist();
 
-    //if updatePlants([
-    // ...plants.filter((item) => item.id !== plantToEdit.id),
-    // plantToEdit,
-
-    setItem({
-      ...item,
+    setPlant({
+      ...plant,
       [ev.target.name]: value,
     });
   };
@@ -37,9 +25,9 @@ function UpdateUserForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`/plants/${id}`, item) //may need to update
+      .put(`/plants/${id}`, plant) //may need to update
       .then((res) => {
-        props.setItems(res.data);
+        props.setPlant(res.data);
         props.history.push(`/plant-list/${id}`); //may need to update
       })
       .catch((err) => {
@@ -53,4 +41,10 @@ function UpdateUserForm(props) {
   );
 }
 
-export default UpdateUserForm;
+const mapStateToProps = (state) => {
+  return {
+    plant: state.selectedPlant, //in reducer, add field for selectedPlant in initialState, and needs action creator that can be dispatched
+  };
+};
+
+export default connect(mapStateToProps, {})(UpdatePlant);
