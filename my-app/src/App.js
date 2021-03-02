@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
 import PlantList from './components/PlantList';
+// import CreateNewUser from './components/CreateNewUser'
 
 import './App.css';
 
@@ -17,7 +18,8 @@ const App = () => {
     <Router>
        <div className="App">
            <Route exact path="/" component={Login} /> 
-           <PrivateRoute path="/plant" component={PlantList} /> 
+           {/* <Route exact path="/" component={CreateNewUser} />  */}
+           <PrivateRoute path="/plantlist" component={PlantList} /> 
            <h1>This is the App</h1>      
       </div>
     </Router>
