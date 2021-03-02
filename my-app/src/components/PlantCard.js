@@ -6,7 +6,7 @@ import img from "../images/plant.jpg";
 const PlantCard = (props) => {
   return (
     <div className="plant-card">
-      <img src={img} alt="What the hell" />
+      <img src={img} alt="plant" />
       <h3>Plant Name</h3>
       <div className="info">
         It's a plant, it needs water every once in a while.
@@ -16,7 +16,6 @@ const PlantCard = (props) => {
 };
 
 export default PlantCard;
-
 //UNIT 3 PERSON
 //DELETE request (just like an x button or trash can or something that sends request)
 //

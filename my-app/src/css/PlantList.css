@@ -1,6 +1,16 @@
 .my-plants {
-  background: darkgray;
+  position: absolute;
+  top: 10%;
+  text-align: center;
+  height: auto;
+  flex-wrap: wrap;
   padding: 1em;
+  width: 100%;
+}
+
+.my-plants a,
+.logout-btn {
+  color: black;
 }
 
 .my-plants .list {
@@ -10,6 +20,18 @@
 }
 
 .logout-btn {
+  background: white;
+  position: absolute;
   display: block;
-  padding: 1em 0;
+  padding: 1em;
+  right: 30%;
+}
+
+.bgSvg {
+  z-index: -1;
+  opacity: 40%;
+  position: absolute;
+  width: 50%;
+  bottom: 0;
+  right: 0;
 }
