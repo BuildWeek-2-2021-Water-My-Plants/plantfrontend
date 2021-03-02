@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import formSchema from "../validation/formSchema";
 import * as yup from "yup";
 import axios from "axios";
+import bgSvg from "../images/BGFoliage.svg";
 
 const initialFormValues = {
   username: "",
@@ -50,205 +51,44 @@ const Login = (props) => {
   }, [formValues]);
 
   return (
-    <div className="login-container">
-      <h3>Login</h3>
-      <form onSubmit={submit}>
-        <label>Username: </label>
-        <br />
-        <input
-          name="username"
-          type="text"
-          onChange={change}
-          value={formValues.username}
-          placeholder="Type your username"
-        />
-        <div className="error">{formErrors.username}</div>
-        <label>Password: </label>
-        <br />
-        <input
-          name="password"
-          type="password"
-          onChange={change}
-          value={formValues.login}
-          placeholder="Type your password"
-        />
-        <div className="error">{formErrors.password}</div>
-        <button className="login-btn" disabled={disabled}>
-          Login
-        </button>
-      </form>
-      {/*Signup button links to: /signup*/}
-      <Link to="/signup" className="signup">
-        Signup
-      </Link>
-    </div>
+    <>
+      <img className="bgSvg" src={bgSvg} alt="foliage" />
+      <div className="login-container">
+        <h3>Login</h3>
+        <form onSubmit={submit}>
+          <label>Username: </label>
+          <br />
+          <input
+            name="username"
+            type="text"
+            onChange={change}
+            value={formValues.username}
+            placeholder="Type your username"
+          />
+          <div className="error">{formErrors.username}</div>
+          <label>Password: </label>
+          <br />
+          <input
+            name="password"
+            type="password"
+            onChange={change}
+            value={formValues.login}
+            placeholder="Type your password"
+          />
+          <div className="error">{formErrors.password}</div>
+          <button className="login-btn" disabled={disabled}>
+            Login
+          </button>
+        </form>
+        {/*Signup button links to: /signup*/}
+        <Link className="signup-btn" to="/signup">
+          Signup
+        </Link>
+      </div>
+    </>
   );
 };
 
 export default Login;
 //UNIT 3 PERSON
 //authentication POST request
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React from 'react';
-
-const Login = () => {
-    return(
-        <div>
-            <h1>Login</h1>
-        </div>
-    )
-}
-
-export default Login;

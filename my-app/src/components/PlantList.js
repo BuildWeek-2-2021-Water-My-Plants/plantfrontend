@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import PlantCard from "./PlantCard";
 import { Link } from "react-router-dom";
+import bgSvg from "../images/BGFoliage.svg";
 
 const PlantList = (props) => {
   useEffect(() => {
@@ -17,11 +18,12 @@ const PlantList = (props) => {
   }, []);
   return (
     <>
+      <img className="bgSvg" src={bgSvg} alt="foliage" />
       <Link className="logout-btn" to="/">
         Log out
       </Link>
       <div className="my-plants">
-        <Link to="/plantform">Add Plant</Link>
+        <Link to="/plantform">Add Plant +</Link>
         <div className="list">
           <PlantCard />
           <PlantCard />
@@ -33,4 +35,3 @@ const PlantList = (props) => {
 };
 
 export default PlantList;
-

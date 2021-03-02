@@ -9,7 +9,7 @@
   margin: 0 2em;
   position: relative;
   border-radius: 1em;
-  border: black solid 2px;
+  border: green solid 2px;
   overflow: hidden;
 }
 
@@ -18,14 +18,23 @@
 }
 
 .plant-card h3 {
+  background: white;
   position: absolute;
-  top: 1em;
+  padding-top: 1em;
+  top: 0;
   text-align: center;
   width: 100%;
 }
 
 .plant-card .info {
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
   position: absolute;
   bottom: 0;
   padding: 1em;
+}
+
+.plant-card:hover .info {
+  visibility: visible;
 }
