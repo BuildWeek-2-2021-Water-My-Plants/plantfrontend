@@ -1,44 +1,104 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import axios from "axios";
-
-const initialPlant = {
-  id: "",
-  nickname: "",
-  species: "",
-  h2oFrequency: null,
-  image: "",
-};
+import { connect } from "react-redux";
+import { addPlant, setError } from "./../actions/"; //Import error stuff!!
 
 function AddNewPlant(props) {
-  const [item, setItem] = useState(initialItem);
-  const id = props.match.params.id;
+  const { setError, addPlant } = props;
+  const [plant, setPlant] = useState({
+    id: "", //Backend?
+    nickname: "",
+    species: "",
+    h2ofrequency: null,
+    image: "",
+  });
 
-  const changeHandler = (ev) => {
+  const handleChange = (ev) => {
     ev.persist();
-    setItem({
-      ...item,
+    setPlant({
+      ...plant,
       [ev.target.name]: value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`/plants/${id}`, item) //may need to update
-      .then((res) => {
-        props.setItems(res.data);
-        props.history.push(`/plant-list/${id}`); //may need to update
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      plant.id === "" || //include id?
+      plant.nickname === "" ||
+      plant.species === "" ||
+      plant.h2ofrequency === null
+    ) {
+      setError();
+      return;
+    }
+    addPlant(plant);
   };
   return (
     <div>
-      <form></form>
+      <h2>Add New Plant</h2>
+      <form>
+        <div className="form-group">
+          <label htmlFor="nickname">Nickname: </label>
+          <br />
+          <input
+            onChange={handleChange}
+            value={plant.nickname}
+            name="nickname"
+            id="nickname"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="species">Species: </label>
+          <br />
+          <input
+            onChange={handleChange}
+            value={plant.species}
+            name="species"
+            id="species"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="h2ofrequency">How often to water: </label>
+          <br />
+          <input
+            onChange={handleChange}
+            value={plant.h2ofrequency}
+            name="h2ofrequency"
+            id="h2ofrequency"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="image">Image: </label>
+          <br />
+          <input
+            onChange={handleChange}
+            value={plant.image}
+            name="image"
+            id="image"
+          />
+        </div>
+        {errorMessage && (
+          <div
+            data-testid="errorAlert"
+            className="alert alert-danger"
+            role="alert"
+          >
+            Error: {errorMessage}
+          </div>
+        )}
+        <button type="submit" onClick={handleSubmit}>
+          Submit New Plant
+        </button>
+      </form>
     </div>
   );
 }
 
-export default AddNewPlant;
+const mapStateToProps = (state) => {
+  return {
+    //error message? why not plant?
+  };
+};
+
+export default connect(mapStateToProps, { addPlant, setError })(AddNewPlant);

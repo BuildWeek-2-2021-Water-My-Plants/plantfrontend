@@ -3,11 +3,14 @@
 //button to PlantList
 
 import React from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-function UpdateUserForm() {
-  const [userInfo, setUserInfo] = useState("");
-  const id = props.match.params.id;
+function UpdateUserForm(props) {
+  const [userInfo, setUserInfo] = useState({ ...props.user }); //might update depending on backend
+  const { id } = useParams();
+  const history = useHistory();
 
   const changeHandler = (ev) => {
     ev.persist();
@@ -41,4 +44,4 @@ function UpdateUserForm() {
   );
 }
 
-export default UpdateUserForm;
+export default connect(mapStateToProps, {})(UpdateUserForm);
