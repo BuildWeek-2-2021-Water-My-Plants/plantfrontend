@@ -20,7 +20,7 @@ export const initialState = {
     username: '',
     email: '',
     password: '',
-    // id: ''
+    id: ''
   },
   isLoading: false,
   error: '',
@@ -123,7 +123,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         additionalPlants: [...state.additionalPlants, editPlant],
         user: {
-          ...state.car,
+          ...state.user,
           plants: [...state.user.plants, editPlant]
         }
       })

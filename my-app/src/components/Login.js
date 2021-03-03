@@ -1,12 +1,11 @@
-//Deavy
-//login form
-//sign-up link button
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import formSchema from "../validation/formSchema";
 import * as yup from "yup";
 import axios from "axios";
 import bgSvg from "../images/BGFoliage.svg";
+
+// import CreateNewUser from './components/CreateNewUser'
 
 const initialFormValues = {
   username: "",
@@ -84,6 +83,9 @@ const Login = (props) => {
         <Link className="signup-btn" to="/signup">
           Signup
         </Link>
+        {/* <Route className="signup-btn" path="/signup" component={CreateNewUser}>
+          Signup
+        </Route> */}
       </div>
     </>
   );
