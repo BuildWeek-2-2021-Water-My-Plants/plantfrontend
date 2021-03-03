@@ -6,7 +6,7 @@ import { addPlant, setError } from "./../actions/"; //Import error stuff!!
 function AddNewPlant(props) {
   const { setError, addPlant } = props;
   const [plant, setPlant] = useState({
-    id: "", //Backend?
+    id: "",
     nickname: "",
     species: "",
     h2ofrequency: null,
@@ -24,7 +24,6 @@ function AddNewPlant(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      plant.id === "" || //include id?
       plant.nickname === "" ||
       plant.species === "" ||
       plant.h2ofrequency === null
@@ -97,7 +96,7 @@ function AddNewPlant(props) {
 
 const mapStateToProps = (state) => {
   return {
-    //error message? why not plant?
+    //error message?
   };
 };
 
