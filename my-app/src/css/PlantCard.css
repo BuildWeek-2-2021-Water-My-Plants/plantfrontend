@@ -35,6 +35,24 @@
   padding: 1em;
 }
 
-.plant-card:hover .info {
+.plant-card:hover .info,
+.plant-card:hover .delete {
   visibility: visible;
+}
+
+.plant-card .delete {
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: rgb(255, 151, 151);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
