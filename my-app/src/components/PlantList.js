@@ -11,11 +11,6 @@ import { connect } from 'react-redux';
 import bgSvg from "../images/BGFoliage.svg";
 
 import PlantCard from "./PlantCard";
-// import UpdatePlant from './UpdatePlant';
-// import UpdateUserForm from './UpdateUserForm';
-// import AddNewPlant from './AddNewPlant';
-// import PrivateRoute from './PrivateRoute';
-
 
 const PlantList = (props) => {
 
@@ -46,9 +41,6 @@ const PlantList = (props) => {
           <PlantCard />
           <PlantCard />
           <PlantCard />
-          {/* <PrivateRoute path="/updatePlant" component={UpdatePlant} />   */}
-          {/* <PrivateRoute path="/updateUser" component={UpdateUserForm} />   */}
-          {/* <PrivateRoute path="/addPlant" component={AddNewPlant} />   */}
         </div>
       </div>
     </>
