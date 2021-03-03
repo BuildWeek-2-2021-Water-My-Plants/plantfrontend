@@ -7,14 +7,13 @@ import React, { useEffect } from "react";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import bgSvg from "../images/BGFoliage.svg";
 
 import PlantCard from "./PlantCard";
 
 const PlantList = (props) => {
-
-  const {user, isLoading} = props;
+  const { user, isLoading } = props;
 
   useEffect(() => {
     axios
@@ -24,14 +23,11 @@ const PlantList = (props) => {
   }, []);
 
   if (isLoading) {
-    return <h1>{isLoading}</h1>
+    return <h1>{isLoading}</h1>;
   }
   return (
     <>
       <img className="bgSvg" src={bgSvg} alt="foliage" />
-      <Link className="logout-btn" to="/">
-        Log out
-      </Link>
       <div className="my-plants">
         <Link to="/addPlant">Add Plant +</Link>
         <div className="list">
@@ -50,8 +46,8 @@ const PlantList = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    isLoading: state.isLoading
-  }
-}
+    isLoading: state.isLoading,
+  };
+};
 
 export default connect(mapStateToProps, {})(PlantList);

@@ -19,14 +19,6 @@
   padding: 1em 0;
 }
 
-.logout-btn {
-  background: white;
-  position: absolute;
-  display: block;
-  padding: 1em;
-  right: 30%;
-}
-
 .bgSvg {
   z-index: -1;
   opacity: 40%;
