@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import formSchema from "../validation/formSchema";
 import * as yup from "yup";
 import axios from "axios";
@@ -12,42 +12,65 @@ const initialFormValues = {
   password: "",
 };
 
+const initialFormErrors = {
+  username: '',
+  password: '',
+}
+
 const Login = (props) => {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState({});
+  const [credentials, setCredentials] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(true);
 
+  const history = useHistory();
   //control input and validation
-  const change = (event) => {
-    const { name, value } = event.target;
+  const change = (e) => {
+    e.preventDefault();
     yup
-      .reach(formSchema, name)
-      .validate(value)
-      .then((valid) => {
-        setFormErrors({ ...formErrors, [name]: "" });
+      .reach(formSchema, e.target.name)
+      .validate(e.target.value)
+      .then(() => {
+        setFormErrors({ ...formErrors, [e.target.name]: "" });
       })
       .catch((err) => {
-        setFormErrors({ ...formErrors, [name]: err.errors[0] });
+        setFormErrors({ ...formErrors, [e.target.name]: err.errors[0] });
       });
-    setFormValues({ ...formValues, [name]: value });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const submit = (event) => {
-    event.preventDefault();
-    /* submit functionality, uncomment when it can be used
-    axios
-      .post("", formValues)
-      .then((res) => {})
-      .catch((err) => {});
-    */
-  };
-
-  //form validation
-  useEffect(() => {
-    formSchema.isValid(formValues).then((valid) => {
+   //form validation
+   useEffect(() => {
+    formSchema.isValid(credentials).then((valid) => {
       setDisabled(!valid);
     });
-  }, [formValues]);
+  }, [credentials]);
+
+  const createNew = () => {
+    history.push('/signup')
+  }
+
+  const submit = (e) => {
+    console.log(submit)
+    e.preventDefault();
+     axios
+     .post("https://watermyplantsbackend2021.herokuapp.com/login", `grant_type=password&username=${credentials.username}&password=${credentials.password}`,
+      {
+        headers: {
+          // btoa is converting our client id/client secret into base64
+          Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    )
+       .then((res) => {
+         console.log(res)
+         localStorage.setItem("token", res.data.access_token);
+         props.history.push("/plantlist")
+       })
+       .catch((err) => {
+         console.log(err)
+       });
+  };
 
   return (
     <>
@@ -61,7 +84,7 @@ const Login = (props) => {
             name="username"
             type="text"
             onChange={change}
-            value={formValues.username}
+            value={credentials.username}
             placeholder="Type your username"
           />
           <div className="error">{formErrors.username}</div>
@@ -71,18 +94,20 @@ const Login = (props) => {
             name="password"
             type="password"
             onChange={change}
-            value={formValues.login}
+            value={credentials.password}
             placeholder="Type your password"
           />
           <div className="error">{formErrors.password}</div>
-          <button className="login-btn" disabled={disabled}>
+          <button className="login-btn" disabled={disabled} onClick={submit}>
             Login
           </button>
+          
         </form>
+        <button className="create" onClick={createNew}>Create New Account</button>
         {/*Signup button links to: /signup*/}
-        <Link className="signup-btn" to="/signup">
+        {/* <Link className="signup-btn" to="/signup">
           Signup
-        </Link>
+        </Link> */}
         {/* <Route className="signup-btn" path="/signup" component={CreateNewUser}>
           Signup
         </Route> */}
@@ -92,5 +117,3 @@ const Login = (props) => {
 };
 
 export default Login;
-//UNIT 3 PERSON
-//authentication POST request
