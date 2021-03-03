@@ -6,24 +6,17 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import FormSchema from "../validation/FormSchema";
-import axios from "axios";
 import { axiosWithAuth } from "../helpers/axiosWithAuth";
-import styled from "styled-components";
-import banner from "../images/banner.jpg";
 
 const initialNewUserFormValues = {
   username: "",
   password: "",
   email: "",
-  birthday: "",
-  // userRole: "",
 };
 const initialNewUserFormErrors = {
   username: "",
   password: "",
-  birthday: "",
   email: "",
-  // userRole: "",
 };
 
 const initialNewUserDisabled = true;
@@ -71,10 +64,7 @@ export default function CreateNewUser() {
 
   const postNewUserInfo = (newUserInfo) => {
     axiosWithAuth()
-      .post(
-        "https://use-my-techstuff.herokuapp.com/api/auth/register",
-        newUserInfo
-      )
+      .post("", newUserInfo)
       .then((res) => {
         console.log(res);
 
