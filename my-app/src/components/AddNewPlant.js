@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { addPlant, setError } from "./../actions/"; //Import error stuff!!
+import { addPlant } from "./../actions/";
 
 function AddNewPlant(props) {
   const { setError, addPlant } = props;
@@ -9,25 +9,21 @@ function AddNewPlant(props) {
     id: "",
     nickname: "",
     species: "",
-    h2ofrequency: null,
-    image: "",
+    h2o: null,
+    plantimg: "",
   });
 
   const handleChange = (ev) => {
     ev.persist();
     setPlant({
       ...plant,
-      [ev.target.name]: value,
+      [ev.target.name]: ev.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      plant.nickname === "" ||
-      plant.species === "" ||
-      plant.h2ofrequency === null
-    ) {
+    if (plant.nickname === "" || plant.species === "" || plant.h2o === null) {
       setError();
       return;
     }
@@ -58,13 +54,13 @@ function AddNewPlant(props) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="h2ofrequency">How often to water: </label>
+          <label htmlFor="h2o">How often to water: </label>
           <br />
           <input
             onChange={handleChange}
-            value={plant.h2ofrequency}
-            name="h2ofrequency"
-            id="h2ofrequency"
+            value={plant.h2o}
+            name="h2o"
+            id="h2o"
           />
         </div>
         <div className="form-group">
@@ -72,12 +68,12 @@ function AddNewPlant(props) {
           <br />
           <input
             onChange={handleChange}
-            value={plant.image}
-            name="image"
-            id="image"
+            value={plant.plantimg}
+            name="plantimg"
+            id="plantimg"
           />
         </div>
-        {errorMessage && (
+        {/* {errorMessage && (
           <div
             data-testid="errorAlert"
             className="alert alert-danger"
@@ -85,7 +81,7 @@ function AddNewPlant(props) {
           >
             Error: {errorMessage}
           </div>
-        )}
+        )} */}
         <button type="submit" onClick={handleSubmit}>
           Submit New Plant
         </button>
@@ -100,4 +96,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addPlant, setError })(AddNewPlant);
+export default connect(mapStateToProps, { addPlant })(AddNewPlant);

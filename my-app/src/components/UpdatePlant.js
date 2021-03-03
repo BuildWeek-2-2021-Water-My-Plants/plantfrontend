@@ -8,31 +8,32 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { editPlant } from "../actions/index";
 
 function UpdatePlant(props) {
   const [plant, setPlant] = useState({ ...props.plant });
   const { id } = useParams();
-  history = useHistory();
+  const history = useHistory();
 
   const handleChange = (ev) => {
     ev.persist();
 
     setPlant({
       ...plant,
-      [ev.target.name]: value,
+      [ev.target.name]: ev.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      plant.nickname === "" ||
-      plant.species === "" ||
-      plant.h2ofrequency === null
-    ) {
-      setError();
-      return;
-    }
+    // if (
+    //   plant.nickname === "" ||
+    //   plant.species === "" ||
+    //   plant.h2ofrequency === null
+    // ) {
+    //   setError();
+    //   return;
+    // }
     editPlant(plant);
   };
 
@@ -80,7 +81,7 @@ function UpdatePlant(props) {
             id="image"
           />
         </div>
-        {errorMessage && (
+        {/* {errorMessage && (
           <div
             data-testid="errorAlert"
             className="alert alert-danger"
@@ -88,7 +89,7 @@ function UpdatePlant(props) {
           >
             Error: {errorMessage}
           </div>
-        )}
+        )} */}
         <button type="submit" onClick={handleSubmit}>
           Click to update plant info
         </button>
@@ -103,4 +104,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { editPlant, setError })(UpdatePlant);
+export default connect(mapStateToProps, { editPlant })(UpdatePlant);

@@ -2,31 +2,31 @@
 //User form, but needs PUT request
 //button to PlantList
 
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { editUser } from "../actions/index";
 
 function UpdateUserForm(props) {
   const [userInfo, setUserInfo] = useState({ ...props.user }); //might update depending on backend
   const { id } = useParams();
   const history = useHistory();
 
-  const changeHandler = (ev) => {
+  const handleChange = (ev) => {
     ev.persist();
-
     setUserInfo({
       ...userInfo,
-      [ev.target.name]: value,
+      [ev.target.name]: ev.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userInfo.username === "" || userInfo.email === "") {
-      setError();
-      return;
-    }
-    editUser(user); //not sure if passing user
+    // if (userInfo.username === "" || userInfo.email === "") {
+    //   setError();
+    //   return;
+    // }
+    editUser(userInfo); //not sure if passing userInfo
   };
   return (
     <div>
@@ -66,4 +66,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { editUser, setError })(UpdateUserForm); //why isn't editUser yellow for function
+export default connect(mapStateToProps, { editUser })(UpdateUserForm); //why isn't editUser yellow for function
