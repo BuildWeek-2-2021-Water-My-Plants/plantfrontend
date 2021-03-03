@@ -14,23 +14,45 @@ import { FETCH_USER_START,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAIL} from '../actions/index';
 
+// export const initialState = {
+//   user: {
+//     plants: [],
+//     username: '',
+//     email: '',
+//     password: '',
+//     id: ''
+//   },
+//   isLoading: false,
+//   error: '',
+//   additionalPlants: [{
+//     id: "",
+//     nickname: "",
+//     species: "",
+//     h20frequency: '',
+//     image: "", //(optional)
+//   }]
+// };
+
 export const initialState = {
   user: {
-    plants: [],
+    userid: '',
     username: '',
-    email: '',
+    primaryemail: '',
     password: '',
-    id: ''
+    plants: [],
   },
   isLoading: false,
   error: '',
-  additionalPlants: [{
-    id: "",
+  additionalPlants: {
     nickname: "",
     species: "",
-    h20frequency: '',
-    image: "", //(optional)
-  }]
+    h20: '',
+    planting: "",
+    user: {
+      username: "",
+      primaryemail: ''
+    }
+  }
 };
 
 export const reducer = (state = initialState, action) => {
