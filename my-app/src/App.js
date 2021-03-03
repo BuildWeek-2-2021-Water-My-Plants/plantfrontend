@@ -2,9 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Login from './components/Login';
+import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import PlantList from './components/PlantList';
-// import CreateNewUser from './components/CreateNewUser'
+
+import { connect } from 'react-redux';
+import { fetchUser, addPlant, deletePlant, editPlant, editUser } from './actions/index'
 
 import './App.css';
 
@@ -14,16 +17,28 @@ import "./css/PlantList.css";
 
 const App = () => {
   return (
-
     <Router>
        <div className="App">
+        <header>
+          <Header />
+        </header>
+        <main>
            <Route exact path="/" component={Login} /> 
            {/* <Route exact path="/" component={CreateNewUser} />  */}
-           <PrivateRoute path="/plantlist" component={PlantList} /> 
-           <h1>This is the App</h1>      
+           <PrivateRoute path="/plantlist" component={PlantList} />  
+        </main>  
       </div>
     </Router>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    error: state.error,
+    isLoading: state.isLoading,
+    user: state.user, 
+    additionalPlants: state.additionalPlants,
+  }
+}
+
+export default connect(mapStateToProps, {fetchUser, editUser, addPlant, deletePlant, editPlant})(App);
