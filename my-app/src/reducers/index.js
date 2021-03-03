@@ -34,7 +34,7 @@ import { FETCH_USER_START,
 // };
 
 export const initialState = {
-  user: {
+  userInfo: {
     userid: '',
     username: '',
     primaryemail: '',
@@ -43,16 +43,18 @@ export const initialState = {
   },
   isLoading: false,
   error: '',
-  additionalPlants: {
+  additionalPlants: [{
+    plantid: '',
     nickname: "",
     species: "",
     h20: '',
     planting: "",
     user: {
+      userid: "",
       username: "",
       primaryemail: ''
     }
-  }
+  }]
 };
 
 export const reducer = (state = initialState, action) => {

@@ -1,53 +1,77 @@
-//UNIT 2 PERSON (MOSTLY)
-//GET Request on mounting (axiosWithAuth?)
-//UI = display list of plant cards
-//has button that links to PlantForm (add plant)
-//Route to it would be plantlist
-import React, { useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+// import axios from "axios";
 
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+// import { connect } from "react-redux";
+// import {fetchUser} from '../actions/index';
 import bgSvg from "../images/BGFoliage.svg";
 
 import PlantCard from "./PlantCard";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const PlantList = (props) => {
-  const { user, isLoading } = props;
+  // const { isLoading } = props;
+  const [findAllTasks, setFindAllTasks] = useState({});
+
+  const history = useHistory()
+
+  const logout = (e) => {
+    axiosWithAuth()
+      .get('/logout')
+      .then((res) => {
+        console.log(res.data)
+      })
+      history.push('/')
+  }
 
   useEffect(() => {
-    axios
-      .get()
-      .then((res) => {})
-      .catch((err) => {});
+      axiosWithAuth()
+      .get("/users/userinfo")
+      .then((res) => {
+        console.log(res)
+        setFindAllTasks(res.data)
+      })
+     
   }, []);
 
-  if (isLoading) {
-    return <h1>{isLoading}</h1>;
-  }
+//   useEffect(() => {
+//     fetchUser()
+//     console.log(fetchUser)
+// }, []);
+
+  // if (isLoading) {
+  //   return <h1>{isLoading}</h1>;
+  // }
   return (
     <>
       <img className="bgSvg" src={bgSvg} alt="foliage" />
       <div className="my-plants">
+      
+        <button onClick={logout}>Sign Out</button>
+       
         <Link to="/addPlant">Add Plant +</Link>
         <div className="list">
-          {/* {user.map(user => (
-            <PlantCard user={user} key={user.id}/>
-          ))} */}
+        {findAllTasks.length > 0 ? 
+          findAllTasks.map(task => {
+            return <PlantCard key={task.userid} email={task.primaryemail} plant={task.plants}/> 
+          }) : null 
+        }
+          {/* <PlantCard />
           <PlantCard />
-          <PlantCard />
-          <PlantCard />
+          <PlantCard /> */}
         </div>
       </div>
     </>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    isLoading: state.isLoading,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     // user: state.user,
+//     // isLoading: state.isLoading,
+//   };
+// };
 
-export default connect(mapStateToProps, {})(PlantList);
+// export default connect(mapStateToProps, {fetchUser})(PlantList);
+
+export default PlantList;

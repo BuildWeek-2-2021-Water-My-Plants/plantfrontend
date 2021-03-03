@@ -98,7 +98,7 @@ const Login = (props) => {
             placeholder="Type your password"
           />
           <div className="error">{formErrors.password}</div>
-          <button className="login-btn" disabled={disabled} onClick={submit}>
+          <button className="login-btn" disabled={disabled}>
             Login
           </button>
           
