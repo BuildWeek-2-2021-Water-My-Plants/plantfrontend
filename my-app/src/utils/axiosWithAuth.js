@@ -7,8 +7,6 @@ export const axiosWithAuth = () => {
         headers: {
             Authorization: `Bearer ${token}`, 
         },
-        baseURL: "https://plantapp.herokuapp.com"
+        baseURL: "https://watermyplantsbackend2021.herokuapp.com"
     })
 }
-
-//need to update baseURL

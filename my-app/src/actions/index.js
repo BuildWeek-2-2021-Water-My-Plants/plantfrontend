@@ -25,7 +25,7 @@ export const fetchUser = () => {
     return dispatch => {
         dispatch({type: FETCH_USER_START})
         axiosWithAuth()
-        .get('/user')
+        .get("/users/userinfo")
         .then((res) => {
             console.log('this is res', res);
             dispatch({type: FETCH_USER_SUCCESS, payload: res.data})
@@ -41,7 +41,7 @@ export const editUser = (id) => {
     return dispatch => {
         dispatch({type: FETCH_USER_START})
         axiosWithAuth()
-        .put('/editUser', id)
+        .put(`users/user/${id}`, id)
         .then((res) => {
             console.log("edit user res", res)
             dispatch({type: FETCH_USER_SUCCESS, payload: res.data.id})
@@ -57,7 +57,7 @@ export const addPlant = (id) => {
     return dispatch => {
         dispatch ({type: ADD_NEW_PLANT_START})
         axiosWithAuth()
-        .post("/addplant", id)
+        .post(`/users/plants`, id)
         .then((res) => {
             console.log("Add plant res", res);
             dispatch({type: ADD_NEW_PLANT_SUCCESS, payload: res.data.id})
@@ -73,7 +73,7 @@ export const deletePlant = (id) => {
     return dispatch => {
         dispatch({type: DELETE_PLANT_START})
         axiosWithAuth()
-        .delete(`/deleteplant/${id}`)
+        .delete(`/users/user/${id}`)
         .then((res) => {
             console.log("delete plant res", res)
             dispatch({type: DELETE_PLANT_SUCCESS, payload: res.data.id})
