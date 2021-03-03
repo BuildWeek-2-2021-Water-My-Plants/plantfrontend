@@ -41,7 +41,7 @@ export const editUser = (id) => {
     return dispatch => {
         dispatch({type: FETCH_USER_START})
         axiosWithAuth()
-        .put(`users/user/${id}`, id)
+        .patch(`users/user/${id}`, id)
         .then((res) => {
             console.log("edit user res", res)
             dispatch({type: FETCH_USER_SUCCESS, payload: res.data.id})
@@ -89,7 +89,7 @@ export const editPlant = (id) => {
     return dispatch => {
         dispatch({type: EDIT_PLANT_START})
         axiosWithAuth()
-        .put(`/updateplant/${id}`, id)
+        .patch(`/updateplant/${id}`, id)
         .then((res) => {
             console.log("edit plant res", res)
             dispatch({type: EDIT_PLANT_SUCCESS, payload: res.data.id})

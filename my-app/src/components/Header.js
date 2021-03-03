@@ -12,13 +12,14 @@ const Header = () => {
         <NavLink to="/" className="home-btn">
           Home
         </NavLink>
-        <Switch>
+        {/* <Switch>
           <Route path="/plantlist">
             <NavLink to="/" className="signout-btn">
               Sign out
             </NavLink>
           </Route>
-        </Switch>
+        </Switch> */}
+        
       </nav>
     </div>
   );
