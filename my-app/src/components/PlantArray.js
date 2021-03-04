@@ -33,8 +33,8 @@ import React, { useState } from 'react';
              console.log("patch res", res)
              setEditing(false)
              const newPlant = plantsArray.map((plant) => {
-                 if(plant.plantid === res.plantid){
-                     return res
+                 if(plant.plantid === plantToEdit.plantid){
+                     return plantToEdit
                  } else {
                      return plant
                  }
@@ -45,6 +45,18 @@ import React, { useState } from 'react';
              console.log(err)
          })
      }
+
+    const postNewPlant = (newPlant) => {
+        axiosWithAuth()
+        .post('/users/plants', newPlant)
+        .then((res) => {
+            console.log(res)
+            updatePlants(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
      const deletePlant = (plant) => {
          axiosWithAuth()
