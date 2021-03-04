@@ -80,6 +80,7 @@ import React, { useEffect, useState } from "react";
        }) : null} */}
        </ul>
        <PlantArray plantsArray={plantList} updatePlants={setPlantList}/>
+
        <div>
          <button onClick={logout}>Logout</button>
          <button onClick={addPlant}>Add New Plant</button>

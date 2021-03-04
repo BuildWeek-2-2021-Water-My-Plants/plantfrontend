@@ -1,7 +1,9 @@
 import React from 'react';
+// import AddPlantForm from './AddPlantForm';
 
- const EditMenu = ({plantToEdit, saveEdit, setPlantToEdit, setEditing }) => {
+ const EditMenu = ({plantToEdit, saveEdit, setPlantToEdit, setEditing, updatePlants, plantsArray }) => {
      return(
+       <div>
      <form onSubmit={saveEdit}>
          <div className="form-group">
            <label htmlFor="nickname">Nickname: </label>
@@ -41,7 +43,10 @@ import React from 'react';
              <button onClick={() => setEditing(false)}>Cancel</button>
          </div>
      </form>
+  {/* <AddPlantForm  updatePlants={updatePlants} plantsArray={plantsArray}/> */}
+  </div>
      )
+     
  }
 
  export default EditMenu;
