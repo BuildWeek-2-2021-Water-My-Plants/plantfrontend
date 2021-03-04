@@ -2,29 +2,27 @@
 //React state form sign-up form
 //POST request
 //have button go to login
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 
 const initialNewUserFormValues = {
   username: "",
   password: "",
-  primayemail: "",
+  email: "",
 };
-const initialNewUserFormErrors = {
-  username: "",
-  password: "",
-  primaryemail: "",
-};
+// const initialNewUserFormErrors = {
+//   username: "",
+//   password: "",
+//   primaryemail: "",
+// };
 
 export default function CreateNewUser() {
-  const [newUserFormValues, setNewUserFormValues] = useState(
-    initialNewUserFormValues
-  );
-  const [newUserFormErrors, setNewUserFormErrors] = useState(
-    initialNewUserFormErrors
-  );
+  const [credentials, setCredentials] = useState(initialNewUserFormValues);
+  // const [newUserFormErrors, setNewUserFormErrors] = useState(
+  //   initialNewUserFormErrors
+  // );
 
   const history = useHistory();
   const newUserRouteToHome = () => {
@@ -32,14 +30,15 @@ export default function CreateNewUser() {
   };
 
   const postNewUserInfo = (newUserInfo) => {
-    axiosWithAuth()
+    axios
       .post(
         "https://watermyplantsbackend2021.herokuapp.com/users/user",
         newUserInfo
       )
       .then((res) => {
-        console.log(res);
-
+        console.log(res.data);
+        localStorage.setItem("token", res.data.access_token);
+        setCredentials(initialNewUserFormValues);
         history.push("/");
       })
       .catch((error) => {
@@ -49,8 +48,8 @@ export default function CreateNewUser() {
 
   const inputChange = (ev) => {
     ev.persist();
-    setNewUserFormValues({
-      ...newUserFormValues,
+    setCredentials({
+      ...credentials,
       [ev.target.name]: ev.target.value,
     });
   };
@@ -63,9 +62,9 @@ export default function CreateNewUser() {
 
   const newUserSubmit = () => {
     const newProfile = {
-      username: newUserFormValues.username.trim(),
-      password: newUserFormValues.password.trim(),
-      email: newUserFormValues.email.trim(),
+      username: credentials.username.trim(),
+      password: credentials.password.trim(),
+      primaryemail: credentials.email.trim(),
     };
     postNewUserInfo(newProfile);
   };
@@ -84,7 +83,7 @@ export default function CreateNewUser() {
             <input
               type="text"
               name="username"
-              value={newUserFormValues.username}
+              value={credentials.username}
               onChange={inputChange}
             />
           </label>
@@ -94,7 +93,7 @@ export default function CreateNewUser() {
             <input
               type="text"
               name="password"
-              value={newUserFormValues.password}
+              value={credentials.password}
               onChange={inputChange}
             />
           </label>
@@ -104,7 +103,7 @@ export default function CreateNewUser() {
             <input
               type="email"
               name="email"
-              value={newUserFormValues.email}
+              value={credentials.email}
               onChange={inputChange}
             />
           </label>
