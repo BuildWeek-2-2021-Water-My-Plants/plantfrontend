@@ -1,26 +1,23 @@
 import React from "react";
-// import img from "../images/plant.jpg";
-
-// import { connect } from "react-redux";
-// import { deletePlant } from "../actions/index";
 
 const PlantCard = (props) => {
-  const { email, plants } = props;
+  const { nickname, species } = props;
 
   return (
     <div >
-      <div>
-        <h3>Plant Name</h3>
-        <p>Email: {email}</p>
-        {plants.map((plant) => {
-          return<div>{plant.nickname}</div>
-        })}
-      </div>
      
+        <h3>Plant Name</h3>
+        <p>{nickname}</p>
+        <p>{species}</p>
+       
     </div>
   );
 };
+export default PlantCard;
 
+ {/* {plant.map((pl) => {
+          return<div>{pl.nickname}</div>
+        })}  */}
 //   return (
 //     <div className="plant-card">
 //       <img src={img} alt="plant" />
@@ -45,4 +42,4 @@ const PlantCard = (props) => {
 // };
 
 // export default connect(() => {}, { deletePlant })(PlantCard);
-export default PlantCard;
+
