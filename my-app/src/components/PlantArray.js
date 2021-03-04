@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
  import { axiosWithAuth } from '../utils/axiosWithAuth';
  import EditMenu from './EditMenu';
+//  import AddPlantForm from './AddPlantForm';
 
  const initalPlant = {
      plantid: '',
@@ -29,10 +30,11 @@ import React, { useState } from 'react';
          axiosWithAuth()
          .patch(`/users/plants/${plantToEdit.plantid}`, plantToEdit)
          .then((res)=> {
-             console.log(res)
+             console.log("patch res", res)
+             setEditing(false)
              const newPlant = plantsArray.map((plant) => {
-                 if(plant.plantid === plantToEdit.plantid){
-                     return plantToEdit
+                 if(plant.plantid === res.plantid){
+                     return res
                  } else {
                      return plant
                  }
@@ -49,7 +51,9 @@ import React, { useState } from 'react';
          .delete(`/users/plants${plant.plantid}`)
          .then((res) => {
              console.log("delete plant res", res)
-             updatePlants(plantsArray.filter((plant) => plant.plantid !== res.data))
+             const newPlantDelete = plantsArray.filter(plant => plant.plantid !== res.data)
+             updatePlants(newPlantDelete)
+            //  updatePlants(plantsArray.filter((plant) => plant.plantid !== res.data))
          })
          .catch((err) => {
              console.log(err)
@@ -74,7 +78,8 @@ import React, { useState } from 'react';
                  </li>
              ))}
          </ul>
-         { editing && <EditMenu plantToEdit={plantToEdit} saveEdit={saveEdit} setPlantToEdit={setPlantToEdit}/>}
+         { editing && <EditMenu plantsArray={plantsArray} updatePlants={updatePlants} plantToEdit={plantToEdit} saveEdit={saveEdit} setPlantToEdit={setPlantToEdit}/>}
+        {/* <AddPlantForm deletePlant={deletePlant} editing={editing} editPlant={editPlant} plant={plant}/> */}
      </div>
      )
  }

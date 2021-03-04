@@ -63,7 +63,7 @@ const Login = (props) => {
       },
     )
        .then((res) => {
-         console.log(res)
+         console.log("login", res)
          localStorage.setItem("token", res.data.access_token);
          props.history.push("/plantlist")
        })
