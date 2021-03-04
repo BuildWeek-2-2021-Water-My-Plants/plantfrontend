@@ -46,26 +46,13 @@ import React, { useState } from 'react';
          })
      }
 
-    const postNewPlant = (newPlant) => {
-        axiosWithAuth()
-        .post('/users/plants', newPlant)
-        .then((res) => {
-            console.log(res)
-            updatePlants(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-
      const deletePlant = (plant) => {
          axiosWithAuth()
-         .delete(`/users/plants${plant.plantid}`)
+         .delete(`/users/plants/${plant.plantid}`)
          .then((res) => {
              console.log("delete plant res", res)
-             const newPlantDelete = plantsArray.filter(plant => plant.plantid !== res.data)
+             const newPlantDelete = plantsArray.filter(item => item.plantid !== plant.plantid)
              updatePlants(newPlantDelete)
-            //  updatePlants(plantsArray.filter((plant) => plant.plantid !== res.data))
          })
          .catch((err) => {
              console.log(err)
