@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+
 import Login from './components/Login';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
@@ -33,13 +34,12 @@ const App = () => {
           <Header />
         </header>
         <main>
-          <Route exact path="/" component={Login} /> 
+          <Route exact path="/" component={Login} />
           <Route path="/signup" component={CreateNewUser} />
-          <PrivateRoute path="/plantlist" component={PlantList} />  
+          <PrivateRoute path="/plantlist" component={PlantList} />
           {/* <PrivateRoute path="/updatePlant" component={UpdatePlant} /> 
           <PrivateRoute path="/updateUser" component={UpdateUserForm} />   */}
           <PrivateRoute path="/addPlant" component={AddNewPlant} />   
-        </main>  
       </div>
     </Router>
   );
