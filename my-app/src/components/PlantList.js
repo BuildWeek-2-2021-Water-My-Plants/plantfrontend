@@ -4,7 +4,6 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import PlantCard from "./PlantCard";
 import FakePlantCard from './FakePlantCard';
 
-
 // import { connect } from "react-redux";
 // import {fetchUser} from '../actions/index';
 import bgSvg from "../images/BGFoliage.svg";
@@ -22,6 +21,18 @@ const [plantInfo, setPlantInfo] = useState({});
         localStorage.clear("token");
       })
       history.push('/')
+  }
+
+  const addPlant = () => {
+    history.push('/addPlant')
+  }
+
+  const editPlant = () => {
+    history.push('/updatePlant')
+  }
+
+  const editUser = () => {
+    history.push('/updateUser')
   }
 
   useEffect(() => {
@@ -46,10 +57,13 @@ const [plantInfo, setPlantInfo] = useState({});
     </div>
     {plantInfo.length > 0 ?
         plantInfo.plants.map((plant) => {
-          return <PlantCard key={plant.plantid} nickname={plant.nickname} species={plant.species}/>
+          return <PlantCard setDeletePlant={setPlantInfo} deletePlant={plantInfo} key={plant.plantid} nickname={plant.nickname} species={plant.species}/>
     }) : <FakePlantCard />}
     <div>
       <button onClick={logout}>Logout</button>
+      <button onClick={addPlant}>Add New Plant</button>
+      <button onClick={editPlant}>Edit Plant</button>
+      <button onClick={editUser}>Edit User</button>
     </div>
     </>
   );
