@@ -3,6 +3,7 @@ import React from 'react';
 const EditMenu = ({plantToEdit, saveEdit, setPlantToEdit, setEditing }) => {
     return(
     <form onSubmit={saveEdit}>
+      <legend>edit plant</legend>
         <div className="form-group">
           <label htmlFor="nickname">Nickname: </label>
           <br />
