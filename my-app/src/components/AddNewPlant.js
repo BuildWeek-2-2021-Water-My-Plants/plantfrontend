@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addPlant } from "./../actions/";
@@ -9,9 +9,14 @@ function AddNewPlant(props) {
     id: "",
     nickname: "",
     species: "",
-    h2o: null,
+    h20: null,
     plantimg: "",
   });
+
+  const history = useHistory();
+  const routeToPlantList = () => {
+    history.push("/plantlist");
+  };
 
   const handleChange = (ev) => {
     ev.persist();
@@ -28,6 +33,7 @@ function AddNewPlant(props) {
       return;
     }
     addPlant(plant);
+    routeToPlantList();
   };
   return (
     <div>
@@ -54,13 +60,13 @@ function AddNewPlant(props) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="h2o">How often to water: </label>
+          <label htmlFor="h20">How often to water: </label>
           <br />
           <input
             onChange={handleChange}
-            value={plant.h2o}
-            name="h2o"
-            id="h2o"
+            value={plant.h20}
+            name="h20"
+            id="h20"
           />
         </div>
         <div className="form-group">
