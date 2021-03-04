@@ -20,7 +20,6 @@ import {
 } from "./actions/index";
 
 import "./App.css";
-
 import "./css/Login.css";
 import "./css/FakePlantCard.css";
 import "./css/PlantList.css";
@@ -34,15 +33,13 @@ const App = () => {
           <Header />
         </header> */}
         <main>
-
           <Route exact path="/" component={Login} /> 
           <Route path="/signup" component={CreateNewUser} />
           <PrivateRoute path="/plantlist" component={PlantList} />  
-
           {/* <PrivateRoute path="/updatePlant" component={UpdatePlant} /> 
           <PrivateRoute path="/updateUser" component={UpdateUserForm} />  
           <PrivateRoute path="/addPlant" component={AddNewPlant} />    */}
-        </main>
+        </main>  
       </div>
     </Router>
   );
