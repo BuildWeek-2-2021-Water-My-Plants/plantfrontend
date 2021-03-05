@@ -8,13 +8,13 @@ import PlantList from "./components/PlantList";
 import CreateNewUser from "./components/CreateNewUser";
 import AddNewPlant from "./components/AddNewPlant";
 import UpdateUserForm from "./components/UpdateUserForm";
-
+ 
 import { connect } from "react-redux";
 import { fetchUser, addPlant, editUser } from "./actions/index";
 
 import "./App.css";
 import "./css/Login.css";
-import "./css/FakePlantCard.css";
+import "./css/PlantCard.css";
 import "./css/PlantList.css";
 import "./css/Header.css";
 
