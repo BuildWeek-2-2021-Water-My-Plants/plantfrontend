@@ -7,10 +7,14 @@ import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { editUser } from "../actions/index";
 
-function UpdateUserForm(props) {
+const UpdateUserForm = (props) => {
   const [userInfo, setUserInfo] = useState({ ...props.user }); //might update depending on backend
   const { id } = useParams();
+
   const history = useHistory();
+  const routeToPlantList = () => {
+    history.push("/plantlist");
+  };
 
   const handleChange = (ev) => {
     ev.persist();
@@ -21,12 +25,14 @@ function UpdateUserForm(props) {
   };
 
   const handleSubmit = (e) => {
+    console.log("submitting: ", userInfo);
     e.preventDefault();
     // if (userInfo.username === "" || userInfo.email === "") {
     //   setError();
     //   return;
     // }
-    editUser(userInfo); //not sure if passing userInfo
+    editUser({ ...userInfo, id }); //not sure if passing userInfo
+    //routeToPlantList();
   };
   return (
     <div>
@@ -52,13 +58,13 @@ function UpdateUserForm(props) {
             id="email"
           />
         </div>
-        <button type="submit" onClick={handleSubmit}>
+        <div type="submit" onClick={handleSubmit}>
           Click to update user information
-        </button>
+        </div>
       </form>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -66,4 +72,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { editUser })(UpdateUserForm); //why isn't editUser yellow for function
+export default connect(mapStateToProps, { editUser })(UpdateUserForm);
