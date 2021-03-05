@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 
  import PlantCard from "./PlantCard";
  import PlantArray from './PlantArray';
- // import FakePlantCard from './FakePlantCard';
  // import bgSvg from "../images/BGFoliage.svg";
 
  const PlantList = (props) => {
-   const [plantInfo, setPlantInfo] = useState({});
+
+   const [plantInfo, setPlantInfo] = useState([]);
    const [plantList, setPlantList] = useState([])
    const history = useHistory()
 
@@ -34,12 +34,13 @@ import React, { useEffect, useState } from "react";
     axiosWithAuth()
     .get("/users/userinfo")
     .then((res) => {
-      console.log(res)
-      setPlantInfo(res.data)
-    })
-       .catch((err) => {
-         console.log(err)
-       })
+       console.log("plantinfo", res.data)
+       setPlantInfo(res.data.plants)
+       console.log(plantInfo)
+     })
+        .catch((err) => {
+          console.log(err)
+      })
    }, []);
   
 
@@ -59,8 +60,8 @@ import React, { useEffect, useState } from "react";
    return (
      <div>
        <div>
-         <h1>Hi, {plantInfo.username}!</h1>
-         <h3>This is your email: {plantInfo.primaryemail}</h3>
+         {/* <h1>Hi, {plantInfo.username}!</h1>
+         <h3>This is your email: {plantInfo.primaryemail}</h3> */}
          <br/>
        </div>
        <ul>
@@ -90,3 +91,14 @@ import React, { useEffect, useState } from "react";
  };
 
  export default PlantList;
+
+// const mapStateToProps = (state) => {
+//   return{
+//     error: state.error,
+//     isLoading: state.isLoading,
+//     user: state.user,
+//   }
+// }
+
+// export default connect(mapStateToProps, {fetchUser})(PlantList);
+

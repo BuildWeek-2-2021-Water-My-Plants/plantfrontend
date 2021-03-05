@@ -103,3 +103,4 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { addPlant })(AddNewPlant);
+// export default AddNewPlant;
