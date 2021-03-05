@@ -132,18 +132,9 @@ export const reducer = (state = initialState, action) => {
 //   })
 // }
 
-// ADD_NEW_PLANT_START,
-// ADD_NEW_PLANT_SUCCESS,
-// ADD_NEW_PLANT_FAIL,
 // DELETE_PLANT_START,
 // DELETE_PLANT_SUCCESS,
 // DELETE_PLANT_FAIL,
-// EDIT_USER_START,
-// EDIT_PLANT_START,
-// EDIT_PLANT_SUCCESS,
-// EDIT_PLANT_FAIL,
-// EDIT_USER_SUCCESS,
-// EDIT_USER_FAIL
 
 // additionalPlants: [{
 //   plantid: '',

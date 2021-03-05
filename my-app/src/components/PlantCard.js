@@ -2,13 +2,15 @@ import React from "react";
 
  const PlantCard = ( props) => {
 
-   const { nickname, species } = props;
+   const { nickname, species, h20 } = props;
 
    return (
-     <div >
-         <h3>Plant Name</h3>
-         <p>{nickname}</p>
-         <p>{species}</p>
+     <div className="plant-card">
+       <div className="plant-card">
+         <h4>Plant Name: {nickname}</h4>
+         <p>It's a: {species}</p>
+         <p>Water it: {h20}</p>
+         </div>
      </div>
    );
  };

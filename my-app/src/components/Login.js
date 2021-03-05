@@ -5,8 +5,6 @@ import * as yup from "yup";
 import axios from "axios";
 import bgSvg from "../images/BGFoliage.svg";
 
-// import CreateNewUser from './components/CreateNewUser'
-
 const initialFormValues = {
   username: "",
   password: "",
@@ -56,7 +54,6 @@ const Login = (props) => {
      .post("https://watermyplantsbackend2021.herokuapp.com/login", `grant_type=password&username=${credentials.username}&password=${credentials.password}`,
       {
         headers: {
-          // btoa is converting our client id/client secret into base64
           Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -100,17 +97,9 @@ const Login = (props) => {
           <div className="error">{formErrors.password}</div>
           <button className="login-btn" disabled={disabled}>
             Login
-          </button>
-          
+          </button>   
         </form>
         <button className="create" onClick={createNew}>Create New Account</button>
-        {/*Signup button links to: /signup*/}
-        {/* <Link className="signup-btn" to="/signup">
-          Signup
-        </Link> */}
-        {/* <Route className="signup-btn" path="/signup" component={CreateNewUser}>
-          Signup
-        </Route> */}
       </div>
     </>
   );

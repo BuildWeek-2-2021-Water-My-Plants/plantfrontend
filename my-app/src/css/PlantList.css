@@ -1,29 +1,41 @@
 .my-plants {
-  position: absolute;
-  top: 10%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2%;
+  padding-bottom: 5%;
+  margin: 1%;
+  /* border-style: solid 5px;
+  border-color: green; */
+  flex-wrap: wrap;
+  /* position: absolute;
+  top: 10%; */
   text-align: center;
-  height: auto;
+  /* height: 100px;
   flex-wrap: wrap;
   padding: 1em;
-  width: 100%;
+  width: 100%; */
+}
+.plant-buttons{
+  margin: 5%;
 }
 
-.my-plants a,
 .logout-btn {
-  color: black;
+  color: green;
 }
 
-.my-plants .list {
+/* .my-plants .list {
   display: flex;
   justify-content: center;
   padding: 1em 0;
-}
+} */
 
-.bgSvg {
+/* .bgSvg {
   z-index: -1;
   opacity: 40%;
   position: absolute;
   width: 50%;
   bottom: 0;
   right: 0;
-}
+} */
