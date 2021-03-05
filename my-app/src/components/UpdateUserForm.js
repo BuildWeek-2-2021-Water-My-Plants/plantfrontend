@@ -32,7 +32,7 @@ const UpdateUserForm = (props) => {
     //   return;
     // }
     editUser({ ...userInfo, id }); //not sure if passing userInfo
-    //routeToPlantList();
+    routeToPlantList();
   };
   return (
     <div>
@@ -58,9 +58,9 @@ const UpdateUserForm = (props) => {
             id="email"
           />
         </div>
-        <div type="submit" onClick={handleSubmit}>
+        <button type="submit" onClick={handleSubmit}>
           Click to update user information
-        </div>
+        </button>
       </form>
     </div>
   );
